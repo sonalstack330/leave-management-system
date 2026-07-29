@@ -27,9 +27,14 @@ public class EmployeeService {
         if(employee.getLeaveBalance() == null){
             employee.setLeaveBalance(20);
         }
+        if (employee.getManager() != null && employee.getManager().getId() != null) {
+            Employee manager = employeeRepository.findById(employee.getManager().getId())
+                    .orElseThrow(() -> new NoSuchElementException(
+                            "Manager not found with id: " + employee.getManager().getId()));
+            employee.setManager(manager);
+        }
         return employeeRepository.save(employee);
     }
-
     public List<Employee> getEmployeesByManager(Long managerId) {
         return employeeRepository.findByManagerId(managerId);
     }
