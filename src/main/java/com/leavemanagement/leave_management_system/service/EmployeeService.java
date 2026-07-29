@@ -24,6 +24,9 @@ public class EmployeeService {
     }
 
     public Employee createEmployee(Employee employee) {
+        if(employee.getLeaveBalance() == null){
+            employee.setLeaveBalance(20);
+        }
         return employeeRepository.save(employee);
     }
 
