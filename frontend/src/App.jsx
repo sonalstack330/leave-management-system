@@ -1,4 +1,5 @@
 import EmployeeList from "./components/EmployeeList";
+import LeaveApplicationForm from "./components/LeaveApplicationForm";
 import "./App.css";
 
 function App() {
