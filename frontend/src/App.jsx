@@ -5,11 +5,14 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <h1> 🏢 Leave Management System</h1>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", maxWidth: "1200px", margin: "0 auto" }}>
+      <header className="app-header">
+        <h1>Leave Management System</h1>
+        <p className="tagline">Apply for leave and track your team's requests</p>
+      </header>
+      <main className="app-main">
         <LeaveApplicationForm />
-      <EmployeeList />
-    </div>
+        <EmployeeList />
+      </main>
     </div>
   );
 }
