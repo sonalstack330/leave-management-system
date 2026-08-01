@@ -1,8 +1,15 @@
+import { useState } from "react";
 import EmployeeList from "./components/EmployeeList";
 import LeaveApplicationForm from "./components/LeaveApplicationForm";
 import "./App.css";
 
 function App() {
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleLeaveApplied = () => {
+    setRefreshKey((prev) => prev + 1);
+  };
+
   return (
     <div className="App">
       <header className="app-header">
@@ -10,8 +17,8 @@ function App() {
         <p className="tagline">Apply for leave and track your team's requests</p>
       </header>
       <main className="app-main">
-        <LeaveApplicationForm />
-        <EmployeeList />
+        <LeaveApplicationForm onLeaveApplied={handleLeaveApplied} />
+        <EmployeeList refreshKey={refreshKey} />
       </main>
     </div>
   );
