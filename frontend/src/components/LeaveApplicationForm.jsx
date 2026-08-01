@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { applyForLeave } from "../api/leaveRequestService";
 
-function LeaveApplicationForm() {
+function LeaveApplicationForm({onLeaveApplied}) {
   const [formData, setFormData] = useState({
     employeeId: "",
     startDate: "",
@@ -25,6 +25,7 @@ function LeaveApplicationForm() {
     applyForLeave(formData)
       .then((response) => {
         setMessage(`✓ Success! Request ID: ${response.data.id}`);
+        onLeaveApplied();
 
         setFormData({
           employeeId: "",
