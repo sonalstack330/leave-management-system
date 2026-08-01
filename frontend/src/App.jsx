@@ -24,7 +24,7 @@ function App() {
        <ManagerDashboard
         managerId={1}
         refreshKey={refreshKey}
-        onReviewComplete={handleRefresh}
+        onReviewComplete={handleLeaveApplied}
       />
     </div>
   );
