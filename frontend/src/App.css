@@ -420,3 +420,31 @@ input[type="date"] {
   color: var(--danger);
   border: 1px solid var(--danger-border);
 }
+
+.app-nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.app-nav a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.app-nav a:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.app-nav a.active {
+  background: var(--primary);
+  color: #fff;
+}
