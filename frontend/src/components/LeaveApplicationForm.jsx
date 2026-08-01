@@ -8,6 +8,7 @@ function LeaveApplicationForm() {
     endDate: "",
     reason: "",
   });
+
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
@@ -24,85 +25,90 @@ function LeaveApplicationForm() {
     applyForLeave(formData)
       .then((response) => {
         setMessage(`✓ Success! Request ID: ${response.data.id}`);
-        setFormData({ employeeId: "", startDate: "", endDate: "", reason: "" });
+
+        setFormData({
+          employeeId: "",
+          startDate: "",
+          endDate: "",
+          reason: "",
+        });
       })
       .catch((err) => {
-        const errorMsg = err.response?.data?.error || "Error";
+        const errorMsg = err.response?.data?.error || "Something went wrong.";
         setMessage(`✗ ${errorMsg}`);
       });
   };
 
   return (
-    <div style={{ background: "#fff", padding: "20px", borderRadius: "8px", marginBottom: "20px" }}>
-      <h2>📝 Apply for Leave</h2>
+    <div className="form-container">
+      <h2>Apply for Leave</h2>
+
+      <p className="form-subtitle">
+        Fill in the details below to submit a leave request.
+      </p>
+
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "15px" }}>
-          <label>Employee ID:</label>
+        <div className="form-group">
+          <label>Employee ID *</label>
+
           <input
             type="number"
             name="employeeId"
+            placeholder="Enter Employee ID"
             value={formData.employeeId}
             onChange={handleChange}
             required
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
           />
         </div>
-        <div style={{ marginBottom: "15px" }}>
-          <label>Start Date:</label>
+
+        <div className="form-group">
+          <label>Start Date *</label>
+
           <input
             type="date"
             name="startDate"
             value={formData.startDate}
             onChange={handleChange}
             required
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
           />
         </div>
-        <div style={{ marginBottom: "15px" }}>
-          <label>End Date:</label>
+
+        <div className="form-group">
+          <label>End Date *</label>
+
           <input
             type="date"
             name="endDate"
             value={formData.endDate}
             onChange={handleChange}
             required
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
           />
         </div>
-        <div style={{ marginBottom: "15px" }}>
-          <label>Reason:</label>
-          <input
-            type="text"
+
+        <div className="form-group">
+          <label>Reason for Leave</label>
+
+          <textarea
             name="reason"
+            placeholder="Briefly describe the reason for your leave..."
             value={formData.reason}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+            rows={4}
           />
-        </div>
-        <button
-          type="submit"
-          style={{
-            background: "#667eea",
-            color: "#fff",
-            padding: "10px 20px",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-            width: "100%",
-          }}
-        >
-          Apply
+        </div>  
+
+        <button type="submit" className="btn-submit">
+          Apply Leave
         </button>
       </form>
+
       {message && (
         <div
-          style={{
-            marginTop: "15px",
-            padding: "10px",
-            background: message.includes("✓") ? "#d4edda" : "#f8d7da",
-            color: message.includes("✓") ? "#155724" : "#721c24",
-            borderRadius: "4px",
-          }}
+          className={`message ${
+            message.startsWith("✓")
+              ? "message-success"
+              : "message-error"
+          }`}
         >
           {message}
         </div>
