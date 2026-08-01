@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { getAllEmployees } from "../api/employeeService";
 
-function EmployeeList() {
+function EmployeeList({refreshKey}) {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
     getAllEmployees()
       .then((response) => {
         setEmployees(response.data);
@@ -17,7 +18,7 @@ function EmployeeList() {
         setLoading(false);
         console.error(err);
       });
-  }, []);
+  }, [refreshKey]);
 
   if (loading) return <p>Loading employees...</p>;
   if (error) return <p>{error}</p>;
