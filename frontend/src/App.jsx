@@ -1,6 +1,7 @@
 import { useState } from "react";
 import EmployeeList from "./components/EmployeeList";
 import LeaveApplicationForm from "./components/LeaveApplicationForm";
+import ManagerDashboard from "./components/ManagerDashboard";
 import "./App.css";
 
 function App() {
@@ -20,6 +21,11 @@ function App() {
         <LeaveApplicationForm onLeaveApplied={handleLeaveApplied} />
         <EmployeeList refreshKey={refreshKey} />
       </main>
+       <ManagerDashboard
+        managerId={1}
+        refreshKey={refreshKey}
+        onReviewComplete={handleRefresh}
+      />
     </div>
   );
 }
