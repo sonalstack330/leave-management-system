@@ -22,11 +22,39 @@ function MyLeaveRequests({ employeeId, refreshKey }) {
   if (loading) return <p>Loading your requests...</p>;
   if (error) return <p>{error}</p>;
 
+  if (loading) {
+  return (
+    <div className="employee-list-container">
+      <h2>My Leave Requests</h2>
+      <div className="state-container">
+        <div className="spinner"></div>
+        <p>Loading your requests...</p>
+      </div>
+    </div>
+  );
+}
+
+if (error) {
+  return (
+    <div className="employee-list-container">
+      <h2>My Leave Requests</h2>
+      <div className="state-container">
+        <div className="empty-icon">⚠️</div>
+        <p>{error}</p>
+      </div>
+    </div>
+  );
+}
+
   return (
     <div className="employee-list-container">
       <h2>My Leave Requests</h2>
       {requests.length === 0 ? (
-        <p>You haven't applied for any leave yet.</p>
+        <div className="state-container">
+        <div className="empty-icon">📋</div>
+        <p>You haven't applied for any leave yet</p>
+        <p className="empty-subtext">Use the form above to submit your first request</p>
+        </div>
       ) : (
         <table className="employee-table">
           <thead>
