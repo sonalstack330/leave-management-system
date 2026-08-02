@@ -75,10 +75,10 @@ function ManagerDashboard({ managerId, refreshKey, onReviewComplete }) {
                 <td>{req.endDate}</td>
                 <td>{req.reason}</td>
                 <td>
-                  <button onClick={() => handleReview(req.id, "APPROVED")}>
+                  <button className = "btn-approve" onClick={() => handleReview(req.id, "APPROVED")}>
                     Approve
                   </button>
-                  <button onClick={() => handleReview(req.id, "REJECTED")}>
+                  <button className = "btn-reject" onClick={() => handleReview(req.id, "REJECTED")}>
                     Reject
                   </button>
                 </td>
