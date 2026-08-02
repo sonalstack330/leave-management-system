@@ -42,6 +42,18 @@ function ManagerDashboard({ managerId, refreshKey, onReviewComplete }) {
   if (loading) return <p>Loading pending requests...</p>;
   if (error) return <p>{error}</p>;
 
+  if (loading) {
+  return (
+    <div className="employee-list-container">
+      <h2>Pending Leave Requests</h2>
+      <div className="state-container">
+        <div className="spinner"></div>
+        <p>Loading pending requests...</p>
+      </div>
+    </div>
+  );
+}
+
   return (
     <div className="employee-list-container">
       <h2>Pending Leave Requests</h2>
@@ -52,8 +64,12 @@ function ManagerDashboard({ managerId, refreshKey, onReviewComplete }) {
         </div>
       )}
 
-      {requests.length === 0 ? (
-        <p>No pending requests.</p>
+        {requests.length === 0 ? (
+        <div className="state-container">
+        <div className="empty-icon">✅</div>
+        <p>All caught up!</p>
+        <p className="empty-subtext">No pending requests need your review</p>
+       </div>
       ) : (
         <table className="employee-table">
           <thead>
