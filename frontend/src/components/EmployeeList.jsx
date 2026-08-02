@@ -23,6 +23,42 @@ function EmployeeList({refreshKey}) {
   if (loading) return <p>Loading employees...</p>;
   if (error) return <p>{error}</p>;
 
+  if (loading) {
+  return (
+    <div className="employee-list-container">
+      <h2>Employees</h2>
+      <div className="state-container">
+        <div className="spinner"></div>
+        <p>Loading employees...</p>
+      </div>
+    </div>
+  );
+}
+
+if (error) {
+  return (
+    <div className="employee-list-container">
+      <h2>Employees</h2>
+      <div className="state-container">
+        <div className="empty-icon">⚠️</div>
+        <p>{error}</p>
+      </div>
+    </div>
+  );
+}
+
+if (employees.length === 0) {
+  return (
+    <div className="employee-list-container">
+      <h2>Employees</h2>
+      <div className="state-container">
+        <div className="empty-icon">👥</div>
+        <p>No employees yet</p>
+      </div>
+    </div>
+  );
+}
+
   return (
     <div>
       <h2>Employees</h2>
