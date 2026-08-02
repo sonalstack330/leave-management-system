@@ -448,3 +448,136 @@ input[type="date"] {
   background: var(--primary);
   color: #fff;
 }
+/* ===========================
+   LOADING & EMPTY STATES
+=========================== */
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--primary-light);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-bottom: 14px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.state-container p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.empty-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
+.empty-subtext {
+  font-size: 13px;
+  color: var(--text-faint);
+  margin-top: 4px;
+}
+
+/* ===========================
+   ACTION BUTTONS - Approve / Reject
+   (used in ManagerDashboard, matches btn-submit language)
+=========================== */
+
+.btn-approve,
+.btn-reject {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin-right: 8px;
+}
+
+.btn-approve {
+  background: var(--success-light);
+  color: var(--success);
+  border: 1px solid var(--success-border);
+}
+
+.btn-approve:hover {
+  background: var(--success);
+  color: #fff;
+}
+
+.btn-reject {
+  background: var(--danger-light);
+  color: var(--danger);
+  border: 1px solid var(--danger-border);
+}
+
+.btn-reject:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 900px) {
+  body {
+    padding: 20px;
+  }
+
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+
+  .app-header h1 {
+    font-size: 26px;
+  }
+
+  .app-nav {
+    flex-wrap: wrap;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 500px) {
+  .app-nav a {
+    flex: 1;
+    text-align: center;
+    padding: 10px 6px;
+    font-size: 13px;
+  }
+
+  .form-container,
+  .employee-list-container {
+    padding: 18px;
+  }
+
+  .employee-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
