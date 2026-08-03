@@ -155,3 +155,125 @@ Open Postman and send a test request:
 - **Expected**: Empty array `[]` (201 if successful)
 
 ---
+
+## 📡 API Endpoints
+
+### Employee Endpoints
+
+#### Create Employee/Manager
+```
+POST /api/employees
+Content-Type: application/json
+
+{
+  "name": "Priya Sharma",
+  "email": "priya@company.com",
+  "department": "Engineering",
+  "role": "MANAGER"
+}
+
+Response: 201 Created
+{
+  "id": 1,
+  "name": "Priya Sharma",
+  "email": "priya@company.com",
+  "department": "Engineering",
+  "role": "MANAGER",
+  "leaveBalance": 20
+}
+```
+
+#### Get All Employees
+```
+GET /api/employees
+
+Response: 200 OK
+[
+  { "id": 1, "name": "Priya Sharma", ... },
+  { "id": 2, "name": "Rahul Verma", ... }
+]
+```
+
+#### Get Employee by ID
+```
+GET /api/employees/{id}
+
+Response: 200 OK
+{ "id": 1, "name": "Priya Sharma", ... }
+```
+
+---
+
+### Leave Request Endpoints
+
+#### Apply for Leave
+```
+POST /api/leave-requests
+Content-Type: application/json
+
+{
+  "employeeId": 2,
+  "startDate": "2026-08-05",
+  "endDate": "2026-08-07",
+  "reason": "Family function"
+}
+
+Response: 201 Created
+{
+  "id": 1,
+  "employeeId": 2,
+  "startDate": "2026-08-05",
+  "endDate": "2026-08-07",
+  "reason": "Family function",
+  "status": "PENDING",
+  "requestedDate": "2026-08-03"
+}
+```
+
+#### Get Pending Requests (Manager View)
+```
+GET /api/leave-requests/manager/{managerId}/pending
+
+Response: 200 OK
+[
+  {
+    "id": 1,
+    "employeeId": 2,
+    "employeeName": "Rahul Verma",
+    "startDate": "2026-08-05",
+    "endDate": "2026-08-07",
+    "reason": "Family function",
+    "status": "PENDING"
+  }
+]
+```
+
+#### Approve/Reject Leave Request
+```
+PUT /api/leave-requests/{id}/review
+Content-Type: application/json
+
+{
+  "status": "APPROVED",
+  "reviewComment": "Approved, enjoy the function"
+}
+
+Response: 200 OK
+{
+  "id": 1,
+  "status": "APPROVED",
+  "reviewComment": "Approved, enjoy the function",
+  "reviewedDate": "2026-08-03"
+}
+```
+
+#### Get All Leave Requests
+```
+GET /api/leave-requests
+
+Response: 200 OK
+[...]
+```
+
+---
+
