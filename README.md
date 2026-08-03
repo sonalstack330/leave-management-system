@@ -56,3 +56,38 @@ Request → Controller → Service → Repository → Database
 - **Environment**: Local development (localhost:8080)
 
 ---
+## 📁 Project Structure
+
+```
+leave-management-system/
+├── leave-management-backend/
+│   ├── pom.xml
+│   ├── src/main/java/com/leavemanagement/
+│   │   ├── LeaveManagementApplication.java          # Spring Boot entry point
+│   │   ├── entity/
+│   │   │   ├── Employee.java                         # User entity with leave balance
+│   │   │   ├── LeaveRequest.java                     # Leave request entity
+│   │   │   ├── Role.java                             # ENUM: MANAGER, EMPLOYEE
+│   │   │   └── LeaveStatus.java                      # ENUM: PENDING, APPROVED, REJECTED
+│   │   ├── repository/
+│   │   │   ├── EmployeeRepository.java               # JPA repository for Employee
+│   │   │   └── LeaveRequestRepository.java           # JPA repository for LeaveRequest
+│   │   ├── service/
+│   │   │   ├── EmployeeService.java                  # Employee management logic
+│   │   │   └── LeaveRequestService.java              # Leave request + approval logic
+│   │   ├── controller/
+│   │   │   ├── EmployeeController.java               # REST endpoints for employees
+│   │   │   └── LeaveRequestController.java           # REST endpoints for leave requests
+│   │   ├── dto/
+│   │   │   ├── LeaveRequestDTO.java                  # Apply leave request DTO
+│   │   │   └── LeaveReviewDTO.java                   # Approve/reject DTO
+│   │   └── exception/
+│   │       ├── ResourceNotFoundException.java         # 404 custom exception
+│   │       └── GlobalExceptionHandler.java            # Global error handler
+│   └── src/main/resources/
+│       └── application.properties                    # Database & server config
+│
+└── README.md                                          # This file
+```
+
+---
