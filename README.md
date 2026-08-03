@@ -15,4 +15,44 @@ The Leave Management System is a comprehensive solution for managing employee le
 **Status**: Backend complete ✅ | Frontend in progress 🚧
 
 ---
+## 🏗️ Architecture
 
+### Backend Architecture: Controller → Service → Repository
+
+```
+Request → Controller → Service → Repository → Database
+           ↓
+         DTOs
+         ↓
+      Exception Handler
+```
+
+**Design Pattern**: Clean Architecture with separation of concerns
+- **Controllers**: REST API endpoints, input validation
+- **Services**: Business logic, leave balance calculation, approval workflows
+- **Repositories**: Data access layer (Spring Data JPA)
+- **DTOs**: Request/response objects (decoupled from entities)
+- **Exception Handlers**: Global error handling with consistent JSON responses
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- **Framework**: Spring Boot 2.7+
+- **Database**: MySQL 8.0+
+- **ORM**: Hibernate/JPA
+- **Build Tool**: Maven
+- **API Testing**: Postman
+
+### Frontend (Coming Soon)
+- **Framework**: React 18+
+- **HTTP Client**: Axios
+- **State Management**: React Context/Redux
+- **UI Components**: LeaveForm, LeaveList, ManagerDashboard
+
+### DevOps
+- **Version Control**: Git
+- **Environment**: Local development (localhost:8080)
+
+---
