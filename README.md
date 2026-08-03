@@ -277,3 +277,92 @@ Response: 200 OK
 
 ---
 
+## 🎨 Design Decisions
+
+### 1. Leave Balance Tracking
+
+**Decision**: Deduct balance only on APPROVED requests, validated on apply.
+
+**Why**:
+- Prevents negative balances
+- Maintains accurate leave inventory
+- Provides real business logic (not just CRUD)
+- Good portfolio talking point in interviews
+
+**Example**:
+- Employee has 20 days
+- Applies for 3 days → request is PENDING, balance stays 20
+- Manager approves → balance drops to 17
+- If manager rejects → balance stays 20
+
+### 2. Manager-Employee Relationship
+
+**Decision**: Self-referencing foreign key on Employee (`manager_id`).
+
+**Why**:
+- Simple hierarchical structure
+- Allows filtering by manager: `GET /api/leave-requests/manager/{id}/pending`
+- Scalable for small-to-medium organizations
+- Easy to extend to multi-level reporting later
+
+**Schema**:
+```sql
+employee.manager_id → employee.id
+```
+
+### 3. DTOs for API Contracts
+
+**Decision**: Separate DTOs from entities (LeaveRequestDTO, LeaveReviewDTO).
+
+**Why**:
+- Decouples API from database schema
+- Prevents exposing JPA internals (lazy loading, circular refs)
+- Allows flexible request/response shapes
+- Easy versioning (v1 DTOs vs v2)
+- Improves security (don't expose all fields)
+
+**Example**:
+```java
+// Clean API contract
+{
+  "employeeId": 2,
+  "startDate": "2026-08-05",
+  "endDate": "2026-08-07",
+  "reason": "Family function"
+}
+
+// Entity has extra fields (hidden)
+// leaveBalance, manager, createdAt, updatedAt, etc.
+```
+
+### 4. Global Exception Handler
+
+**Decision**: Centralized `GlobalExceptionHandler` for consistent error responses.
+
+**Why**:
+- No stack traces leak to API consumers
+- Consistent JSON error format across all endpoints
+- Professional, production-like behavior
+- Easier debugging (HTTP status codes + custom messages)
+
+**Example Response**:
+```json
+{
+  "status": 404,
+  "message": "Employee not found with id: 99",
+  "timestamp": "2026-08-03T10:30:45"
+}
+```
+
+### 5. Separation of Concerns (Service Layer)
+
+**Decision**: All business logic in Service, not Controllers.
+
+**Why**:
+- Controllers thin and focused on routing
+- Services reusable across multiple controllers (if needed)
+- Easier to unit test (mock services)
+- Maintainability for larger codebases
+
+---
+
