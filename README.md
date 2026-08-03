@@ -91,3 +91,67 @@ leave-management-system/
 ```
 
 ---
+
+## 🚀 Installation & Setup
+
+### Prerequisites
+- **Java 11+** installed
+- **Maven 3.6+** installed
+- **MySQL 8.0+** running locally
+- **Postman** (for API testing)
+- **Git** (for version control)
+
+### Step 1: Clone the Repository
+
+```bash
+git clone <repository-url>
+cd leave-management-system
+```
+
+### Step 2: Configure Database
+
+Open `leave-management-backend/src/main/resources/application.properties`:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/leave_management?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.password=your_mysql_password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+server.port=8080
+```
+
+Replace `your_mysql_password` with your actual MySQL password.
+
+### Step 3: Build & Run
+
+```bash
+# Navigate to backend directory
+cd leave-management-backend
+
+# Build the project (downloads dependencies)
+mvn clean install
+
+# Run the application
+mvn spring-boot:run
+```
+
+**Expected Output**:
+```
+Started LeaveManagementApplication in X.XXX seconds
+```
+
+The backend will be available at `http://localhost:8080`
+
+### Step 4: Verify Setup
+
+Open Postman and send a test request:
+- **Method**: GET
+- **URL**: `http://localhost:8080/api/employees`
+- **Expected**: Empty array `[]` (201 if successful)
+
+---
