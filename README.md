@@ -366,3 +366,15 @@ employee.manager_id → employee.id
 
 ---
 
+## ✨ Features
+
+### Current (Implemented)
+
+- ✅ Create employees and managers
+- ✅ Apply for leave (with date validation)
+- ✅ Track leave balance (auto-deducted on approval)
+- ✅ Manager approval workflow
+- ✅ View pending requests (manager dashboard)
+- ✅ Automatic leave days calculation
+- ✅ Global exception handling
+- ✅ RESTful API design
